@@ -85,9 +85,15 @@ activities.addEventListener('change', (e) => {
     const activityDetails = document.querySelectorAll('input[data-day-and-time]');
     
     for (let i = 0; i < activityDetails.length; i++) {
-        if (eventDetails === activityDetails[i].getAttribute('data-day-and-time')) {
-            activityDetails[i].disabled = true;
+        if (eventDetails === activityDetails[i].getAttribute('data-day-and-time') && e.target.name !== activityDetails[i].name) {
+            if (e.target.checked) {
+                activityDetails[i].disabled = true;
+            } else {
+                activityDetails[i].disabled = false;
+            }
         }
     }
 })
+
+//
 
