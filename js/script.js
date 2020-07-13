@@ -95,5 +95,29 @@ activities.addEventListener('change', (e) => {
     }
 })
 
-//
+//Hiding the "Select Payment Method" option from the dropdown
+const paymentSelection = document.getElementById('payment');
+const creditCard = document.getElementById('credit-card');
+const payPal = document.getElementById('paypal');
+payPal.style.display = 'none';
+const bitcoin = document.getElementById('bitcoin');
+bitcoin.style.display = 'none';
+paymentSelection[0].style.display = 'none';
+paymentSelection[1].selected = 'selected';
+
+paymentSelection.addEventListener('change', () => {
+    if (paymentSelection[1].selected) {
+        payPal.style.display = 'none';
+        bitcoin.style.display = 'none';
+        creditCard.style.display = 'block';
+    } else if (paymentSelection[2].selected) {
+        payPal.style.display = 'block';
+        bitcoin.style.display = 'none';
+        creditCard.style.display = 'none';
+    } else if (paymentSelection[3].selected) {
+        payPal.style.display = 'none';
+        bitcoin.style.display = 'block';
+        creditCard.style.display = 'none';
+    }
+})
 
