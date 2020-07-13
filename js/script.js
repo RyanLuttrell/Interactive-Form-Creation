@@ -71,7 +71,7 @@ activities.appendChild(totalPrice);
 //Add event listener with a function to dynamically change the total cost of the events selected
 activities.addEventListener('change', (e) => {
     const testing = e.target.name;
-    const dataCost = parseInt(e.target.getAttribute('data-cost'));
+    const dataCost = +e.target.getAttribute('data-cost');
     if (e.target.checked) {
         totalPriceValue += dataCost;
         totalPrice.textContent = `Total Cost: $${totalPriceValue}`;
@@ -81,5 +81,13 @@ activities.addEventListener('change', (e) => {
     }
 
 //Disabling events if the time of the events are the same
-
+    const eventDetails = e.target.getAttribute('data-day-and-time');
+    const activityDetails = document.querySelectorAll('input[data-day-and-time]');
+    
+    for (let i = 0; i < activityDetails.length; i++) {
+        if (eventDetails === activityDetails[i].getAttribute('data-day-and-time')) {
+            activityDetails[i].disabled = true;
+        }
+    }
 })
+
