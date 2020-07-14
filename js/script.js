@@ -42,6 +42,7 @@ tshirtDesign.addEventListener('change', () => {
             tshirtColor[i].style.display = 'none';
         }
         tshirtColor[1].selected = 'selected';
+        tshirtColor[0].style.display = 'none';
 
 //This ensures that the proper colour options show up for "I love JS" shirts
     } else if (tshirtDesign[2].selected) {
@@ -52,12 +53,14 @@ tshirtDesign.addEventListener('change', () => {
             tshirtColor[i].style.display = 'block';
         }
         tshirtColor[4].selected = 'selected';
+        tshirtColor[0].style.display = 'none';
 
 //This ensures that if it goes back to "Select Theme" all colour options disappear
     } else {
         for (let i = 1; i <=6; i++) {
             tshirtColor[i].style.display = 'none';
         }
+        tshirtColor.style.display = 'block';
         tshirtColor[0].selected = 'selected';
     }
 })
