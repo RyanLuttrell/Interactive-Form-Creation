@@ -124,7 +124,7 @@ paymentSelection.addEventListener('change', () => {
 //If required fields are not properly completed, do not allow the form to submit
 const submitButton = document.getElementsByTagName('button');
 submitButton[0].addEventListener('click', (e) => {
-    if (nameValidation() && emailValidation() && activityValidation()) {
+    if (nameValidation() && emailValidation() && activityValidation() && creditCardValidation()) {
         e.preventDefault();
     }
 })
@@ -160,3 +160,35 @@ function activityValidation() {
     }
 }
 
+//A function to validate the credit card number
+
+function creditCardNumber() {
+    const cardNumber = document.getElementById('cc-num').value;
+    return /^\d{13,16}$/.test(cardNumber);
+}
+
+//A function to validate the zipcode for the credit card field
+
+function creditCardZip() {
+    const zipCode = document.getElementById('zip').value;
+    return /^\d{5}$/.test(zipCode);
+}
+
+//A function to validate the CVV for the credit card field
+
+function creditCardCVV() {
+    const cvv = document.getElementById('cvv').value;
+    return /^\d{3}$/.test(cvv);
+}
+
+function creditCardValidation() {
+    if (paymentSelection[1].selected) {
+        if (creditCardNumber() && creditCardZip() && creditCardCVV()) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return true;
+    }
+}
