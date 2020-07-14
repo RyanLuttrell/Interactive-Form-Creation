@@ -124,9 +124,9 @@ paymentSelection.addEventListener('change', () => {
 
 //If required fields are not properly completed, do not allow the form to submit
 const submitButton = document.getElementsByTagName('button');
-submitButton[0].addEventListener('submit', () => {
+submitButton[0].addEventListener('click', (e) => {
     if (!masterFunction()) {
-        form.preventDefault();
+        e.preventDefault();
     } 
 })
 
@@ -238,22 +238,22 @@ function masterFunction() {
 // newP.textContent = 'Please input a proper email address (ex. david@treehouse.com)';
 // newP.style.color = 'red';
 
-// email.addEventListener('keydown', invalidEmail);
+email.addEventListener('keydown', invalidEmail);
 
-// function invalidEmail () {
-//     if (!emailValidation()) {
-//         if (mail.parentNode.children[3].children.length !== 1) {
-//             mail.parentNode.children[3].appendChild(newP);
-//         }
-//         newP.style.display = 'block';
-//     } else {
-//         newP.style.display = 'none';
-//     }
-// }
+function invalidEmail () {
+    if (!emailValidation()) {
+        if (mail.parentNode.children[3].children.length !== 1) {
+            mail.parentNode.children[3].appendChild(newP);
+        }
+        newP.style.display = 'block';
+    } else {
+        newP.style.display = 'none';
+    }
+}
 
-// //Initially hides the tshirt color options until a design is selected
-// const color = document.getElementById('colors-js-puns');
-// color.style.display = 'none';
+//Initially hides the tshirt color options until a design is selected
+const color = document.getElementById('colors-js-puns');
+color.style.display = 'none';
 
 
 
