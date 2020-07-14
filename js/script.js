@@ -121,3 +121,42 @@ paymentSelection.addEventListener('change', () => {
     }
 })
 
+//If required fields are not properly completed, do not allow the form to submit
+const submitButton = document.getElementsByTagName('button');
+submitButton[0].addEventListener('click', (e) => {
+    if (nameValidation() && emailValidation() && activityValidation()) {
+        e.preventDefault();
+    }
+})
+
+//A function to validate the "Name" field
+function nameValidation() {
+    if (name.value == '') {
+        return false
+    } else {
+        return true
+    }
+}
+
+//A function to validate the "Email" field
+function emailValidation() {
+    const email = document.getElementById('mail').value;
+    return /^[^@]+@[^@.]+\.[a-z]+$/i.test(email);
+}
+
+//A function to validate the selection of at least one activity
+function activityValidation() {
+    const checkboxes = document.querySelectorAll('input[type=checkbox]');
+    const selected = [];
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            selected.push(checkboxes[i].value);
+        }
+    }
+    if (selected.length > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
