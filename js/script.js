@@ -33,6 +33,7 @@ window.addEventListener('load', () => {
 //Ensuring that the proper colour options show up for the "JS Puns" tshirt
 
 tshirtDesign.addEventListener('change', () => {
+    color.style.display = 'block';
     if (tshirtDesign[1].selected) {
         for (let i = 1; i <= 3; i++) {
             tshirtColor[i].style.display = 'block';
@@ -123,10 +124,10 @@ paymentSelection.addEventListener('change', () => {
 
 //If required fields are not properly completed, do not allow the form to submit
 const submitButton = document.getElementsByTagName('button');
-submitButton[0].addEventListener('click', (e) => {
-    if (!nameValidation() || !emailValidation() || !activityValidation() || !creditCardValidation()) {
-        e.preventDefault();
-    }
+submitButton[0].addEventListener('submit', () => {
+    if (!masterFunction()) {
+        form.preventDefault();
+    } 
 })
 
 //A function to validate the "Name" field
@@ -140,13 +141,14 @@ function nameValidation() {
     }
 }
 
+const email = document.getElementById('mail');
 //A function to validate the "Email" field
 function emailValidation() {
-    const email = document.getElementById('mail');
     const emailContent = email.value;
     const emailTest = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailContent);
     if (emailTest) {
         email.style.border = '';
+        newP.style.display = 'none';
         return true;
     } else {
         email.style.border = '1px solid red';
@@ -164,8 +166,10 @@ function activityValidation() {
         }
     }
     if (selected.length > 0) {
+        activities.style.border = '';
         return true;
     } else {
+        activities.style.border = '1px solid red';
         return false;
     }
 }
@@ -211,15 +215,45 @@ function creditCardCVV() {
         return false;
     }
 }
-
+//Ensures that all of the credit card fields are valid
 function creditCardValidation() {
-    if (paymentSelection[1].selected) {
-        if (creditCardNumber() && creditCardZip() && creditCardCVV()) {
-            return true;
-        } else {
-            return false;
-        }
-    } else {
-        return true;
-    }
+    creditCardNumber();
+    creditCardZip();
+    creditCardCVV();
 }
+//This is the master function that ultimately checks to see if all of the fields have been filled in properly
+function masterFunction() {
+    nameValidation();
+    emailValidation();
+    activityValidation();
+    creditCardValidation();
+}
+
+
+
+
+//Exceeds Expectations
+
+// const newP = document.createElement('p');
+// newP.textContent = 'Please input a proper email address (ex. david@treehouse.com)';
+// newP.style.color = 'red';
+
+// email.addEventListener('keydown', invalidEmail);
+
+// function invalidEmail () {
+//     if (!emailValidation()) {
+//         if (mail.parentNode.children[3].children.length !== 1) {
+//             mail.parentNode.children[3].appendChild(newP);
+//         }
+//         newP.style.display = 'block';
+//     } else {
+//         newP.style.display = 'none';
+//     }
+// }
+
+// //Initially hides the tshirt color options until a design is selected
+// const color = document.getElementById('colors-js-puns');
+// color.style.display = 'none';
+
+
+
