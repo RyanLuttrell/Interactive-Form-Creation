@@ -124,7 +124,7 @@ paymentSelection.addEventListener('change', () => {
 //If required fields are not properly completed, do not allow the form to submit
 const submitButton = document.getElementsByTagName('button');
 submitButton[0].addEventListener('click', (e) => {
-    if (nameValidation() && emailValidation() && activityValidation() && creditCardValidation()) {
+    if (!nameValidation() || !emailValidation() || !activityValidation() || !creditCardValidation()) {
         e.preventDefault();
     }
 })
@@ -132,16 +132,26 @@ submitButton[0].addEventListener('click', (e) => {
 //A function to validate the "Name" field
 function nameValidation() {
     if (name.value == '') {
-        return false
+        name.style.border = '1px solid red';
+        return false;
     } else {
-        return true
+        name.style.border = '';
+        return true;
     }
 }
 
 //A function to validate the "Email" field
 function emailValidation() {
-    const email = document.getElementById('mail').value;
-    return /^[^@]+@[^@.]+\.[a-z]+$/i.test(email);
+    const email = document.getElementById('mail');
+    const emailContent = email.value;
+    const emailTest = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailContent);
+    if (emailTest) {
+        email.style.border = '';
+        return true;
+    } else {
+        email.style.border = '1px solid red';
+        return false;
+    }
 }
 
 //A function to validate the selection of at least one activity
@@ -163,22 +173,43 @@ function activityValidation() {
 //A function to validate the credit card number
 
 function creditCardNumber() {
-    const cardNumber = document.getElementById('cc-num').value;
-    return /^\d{13,16}$/.test(cardNumber);
+    const cardNumber = document.getElementById('cc-num');
+    const ccNumberValid = /^\d{13,16}$/.test(cardNumber.value);
+    if (ccNumberValid) {
+        cardNumber.style.border = '';
+        return true;
+    } else {
+        cardNumber.style.border = '1px solid red';
+        return false;
+    }
 }
 
 //A function to validate the zipcode for the credit card field
 
 function creditCardZip() {
-    const zipCode = document.getElementById('zip').value;
-    return /^\d{5}$/.test(zipCode);
+    const zipCode = document.getElementById('zip');
+    const ccZipValid = /^\d{5}$/.test(zipCode.value);
+    if (ccZipValid) {
+        zipCode.style.border = '';
+        return true;
+    } else {
+        zipCode.style.border = '1px solid red';
+        return false;
+    }
 }
 
 //A function to validate the CVV for the credit card field
 
 function creditCardCVV() {
-    const cvv = document.getElementById('cvv').value;
-    return /^\d{3}$/.test(cvv);
+    const cvv = document.getElementById('cvv');
+    const ccCVVValid = /^\d{3}$/.test(cvv.value);
+    if (ccCVVValid) {
+        cvv.style.border = '';
+        return true;
+    } else {
+        cvv.style.border = '1px solid red';
+        return false;
+    }
 }
 
 function creditCardValidation() {
