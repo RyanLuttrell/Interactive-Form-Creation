@@ -178,9 +178,8 @@ function activityValidation() {
 }
 
 //A function to validate the credit card number
-
+const cardNumber = document.getElementById('cc-num');
 function creditCardNumber() {
-    const cardNumber = document.getElementById('cc-num');
     const ccNumberValid = /^\d{13,16}$/.test(cardNumber.value);
     if (ccNumberValid) {
         cardNumber.style.border = '';
@@ -230,6 +229,7 @@ function masterFunction() {
     emailValidation();
     activityValidation();
     creditCardValidation();
+    conditionalError();
 }
 
 
@@ -237,9 +237,9 @@ function masterFunction() {
 
 //Exceeds Expectations
 
-// const newP = document.createElement('p');
-// newP.textContent = 'Please input a proper email address (ex. david@treehouse.com)';
-// newP.style.color = 'red';
+const newP = document.createElement('p');
+newP.textContent = 'Please input a proper email address (ex. david@treehouse.com)';
+newP.style.color = 'red';
 
 email.addEventListener('keydown', invalidEmail);
 
@@ -257,6 +257,31 @@ function invalidEmail () {
 //Initially hides the tshirt color options until a design is selected
 const color = document.getElementById('colors-js-puns');
 color.style.display = 'none';
+
+//Create a conditional error message for the credit card form
+const newP1 = document.createElement('p');
+newP1.textContent = 'Please enter a valid credit card number';
+const newP2 = document.createElement('p');
+newP2.textContent = 'Please enter a credit card number between 13 and 16 digits longs';
+newP1.style.color = 'red';
+newP2.style.color = 'red';
+
+function conditionalError() {
+    if (!creditCardNumber()) {
+        if (cardNumber.value == '' || cardNumber.value == null) {
+            cardNumber.parentElement.appendChild(newP1);
+            newP1.style.display = 'block';
+            newP2.style.display = 'none';
+        } else {
+            cardNumber.parentElement.appendChild(newP2);
+            newP1.style.display = 'none';
+            newP2.style.display = 'block';
+        }
+    } else {
+        newP2.style.display = 'none';
+        newP1.style.display = 'none';
+    }
+}
 
 
 
