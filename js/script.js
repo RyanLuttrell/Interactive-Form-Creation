@@ -110,6 +110,11 @@ paymentSelection[0].style.display = 'none';
 paymentSelection[1].selected = 'selected';
 
 paymentSelection.addEventListener('change', () => {
+    for (let i = 1; i < paymentSelection.length; i++) {
+        if (paymentSelection[i].selected) {
+            
+        }
+    }
     if (paymentSelection[1].selected) {
         payPal.style.display = 'none';
         bitcoin.style.display = 'none';
@@ -222,18 +227,36 @@ function creditCardValidation() {
     creditCardNumber();
     creditCardZip();
     creditCardCVV();
+    if (creditCardNumber() && creditCardZip() && creditCardCVV()){
+        return true;
+    } else {
+        return false;
+    }
 }
 //This is the master function that ultimately checks to see if all of the fields have been filled in properly
 function masterFunction() {
-    nameValidation();
-    emailValidation();
-    activityValidation();
-    creditCardValidation();
-    conditionalError();
+    if (paymentSelection[1].selected) {
+        nameValidation();
+        emailValidation();
+        activityValidation();
+        conditionalError();
+        creditCardValidation();
+        if (nameValidation() && emailValidation() && activityValidation() && conditionalError() && creditCardValidation()) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        nameValidation();
+        emailValidation();
+        activityValidation();
+        if (nameValidation() && emailValidation() && activityValidation()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
-
-
-
 
 //Exceeds Expectations
 
@@ -272,16 +295,16 @@ function conditionalError() {
             cardNumber.parentElement.appendChild(newP1);
             newP1.style.display = 'block';
             newP2.style.display = 'none';
+            return false;
         } else {
             cardNumber.parentElement.appendChild(newP2);
             newP1.style.display = 'none';
             newP2.style.display = 'block';
+            return false;
         }
     } else {
         newP2.style.display = 'none';
         newP1.style.display = 'none';
+        return true;
     }
 }
-
-
-
