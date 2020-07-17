@@ -285,7 +285,7 @@ color.style.display = 'none';
 const newP1 = document.createElement('p');
 newP1.textContent = 'Please enter a valid credit card number';
 const newP2 = document.createElement('p');
-newP2.textContent = 'Please enter a credit card number between 13 and 16 digits longs';
+newP2.textContent = 'Please enter a credit card number between 13 and 16 digits';
 newP1.style.color = 'red';
 newP2.style.color = 'red';
 
